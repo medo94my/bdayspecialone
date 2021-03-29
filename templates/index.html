@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="../static/images/cake-slice.png" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    {%if dt.day ==26 and dt.month==3%}
+    <link rel="stylesheet" href="./static/css/fireworks.css">
+    {% endif%}
+    <link rel="stylesheet" href="./static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <link rel="stylesheet" href="./static/css/clock.css">
+    <title>nabila birthday</title>
+  </head>
+  <body>
+    <div class="pyro">
+      <div class="before"></div>
+      <div class="after"></div>
+      {%if dt.day ==26 and dt.month==3%}
+      <div class="card-d">
+        <div class="card-body">
+          <h1 class="text">Happy birthday honey </h1>
+          <p  class="iamge" align="center">
+            <img src="../static/images/cake1.png" alt="cake" width="400">
+          </p>
+        </div>
+      </div>
+  </div>
+    {%else%}
+    <div class="card-d">
+      <div class="card-body">
+    <div id="clock">
+      <p class="date">{(date )}</p>
+      <p class="time">{( time )}</p>
+      </div>
+      </div>
+  </div>
+    {%endif %}
+    <script>
+
+
+let clock = new Vue({
+    el: '#clock',
+    delimiters:['{(', ')}'],
+    data: {
+        time: '',
+        date: '', 
+    }
+});
+
+
+let  week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+let  timerID = setInterval(updateTime, 1000);
+updateTime();
+function updateTime() {
+  let  cd = new Date();
+  clock.time = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+  clock.date = zeroPadding(cd.getFullYear(), 4) + '-' + zeroPadding(cd.getMonth()+1, 2) + '-' + zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+};
+
+function zeroPadding(num, digit) {
+  let  zero = '';
+  for(let  i = 0; i < digit; i++) {
+    zero += '0';
+  }
+  return (zero + num).slice(-digit);
+}
+let  cd = new Date();
+console.log(cd.getMinutes());
+if (cd.getMonth()+1==3 && cd.getDate()==26 && cd.getHours() ==24 && cd.getMinutes() ==0 && cd.getSeconds()==0){
+  console.log('hello clock');
+  location.reload()
+}
+    </script>
+  </body>
+</html>
